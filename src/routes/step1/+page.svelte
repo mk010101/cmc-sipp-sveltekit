@@ -26,14 +26,13 @@
     });
     console.log($customer);
   }
-  let selected: string = '';
 </script>
 
 <main>
   <h2>How should we address you?</h2>
   <p>Can you provide us with a title that can be used before your name?</p>
   <form on:input={onSelect}>
-    <cmc-select placeholder="Select title" value={$customer.title || ''}>
+    <cmc-select placeholder="Select title" value={$customer.title}>
       <option />
       {#each options as opt}
         <option value={opt.toLowerCase()}>{opt}</option>
