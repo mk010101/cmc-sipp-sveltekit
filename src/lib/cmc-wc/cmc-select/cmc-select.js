@@ -1,6 +1,6 @@
-import { CmcInputElement } from "../CmcInputElement.js";
+import { CmcInputElement } from '../CmcInputElement.js';
 export class CmcSelect extends CmcInputElement {
-    static template = /*html*/ `
+  static template = /*html*/ `
     <style>      
       cmc-select {
         display: inline-block;
@@ -97,35 +97,65 @@ export class CmcSelect extends CmcInputElement {
     <div class="icon-keyboard_arrow_down arrow"></div>
     </label>  
   `;
-    #floater = null;
-    static get observedAttributes() {
-        return CmcInputElement.watchedAttributes.concat();
-    }
-    constructor() {
-        super();
-        this._template = CmcSelect.template;
-    }
-    connectedCallback() {
-        super.connectedCallback();
-        this._inputElement = this.querySelector(".cmcwc-select");
-        this.#floater = this.querySelector(".floater");
-        this._setConnected();
-    }
-    attributeChangedCallback(name, _, newValue) {
-        super.attributeChangedCallback(name, _, newValue);
-        if (!this._connected)
-            return;
-        switch (name) {
-            case "placeholder":
-                this.#floater.textContent = newValue;
-                this._inputElement.placeholder = newValue;
-                break;
-            case "multiple":
-                this.#floater.style.display = "none";
-                const arrow = this.querySelector(".arrow");
-                arrow.style.display = "none";
-                break;
+  #floater = null;
+  static get observedAttributes() {
+    return CmcInputElement.watchedAttributes.concat();
+  }
+  constructor() {
+    super();
+    this._template = CmcSelect.template;
+  }
+  connectedCallback() {
+    requestAnimationFrame(() => {
+      super.connectedCallback();
+      this._inputElement = this.querySelector('.cmcwc-select');
+      this.#floater = this.querySelector('.floater');
+      this._setConnected();
+    });
+  }
+  attributeChangedCallback(name, _, newValue) {
+    super.attributeChangedCallback(name, _, newValue);
+    if (!this._connected) return;
+    switch (name) {
+      case 'placeholder':
+        this.#floater.textContent = newValue;
+        this._inputElement.placeholder = newValue;
+        break;
+      case 'multiple':
+        this.#floater.style.display = 'none';
+        const arrow = this.querySelector('.arrow');
+        arrow.style.display = 'none';
+        break;
+
+      case 'value':
+        const opts = Array.from(this.querySelectorAll('option'));
+        let found = false;
+        for (let i = 0; i < opts.length; i++) {
+          //console.log(opts[i].value, newValue);
+          if (opts[i].value.toLowerCase() === newValue.toLowerCase()) {
+            this._inputElement.selectedIndex = i;
+            found = true;
+            //break;
+          }
         }
+        if (!found) {
+          const opt = document.createElement('option');
+          opt.value = newValue;
+          opt.textContent = newValue;
+          this._inputElement.appendChild(opt);
+          this._inputElement.selectedIndex = opts.length - 1;
+          console.log(opts.length, found);
+        }
+        break;
     }
+  }
+  set value(val) {
+    this._setAttr('value', val);
+  }
+  get value() {
+    if (!this._inputElement) return '';
+    return this._inputElement?.value;
+    //return this._inputElement.querySelector("option[selected]").value
+  }
 }
-customElements.define("cmc-select", CmcSelect);
+customElements.define('cmc-select', CmcSelect);

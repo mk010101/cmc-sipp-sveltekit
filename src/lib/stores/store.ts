@@ -1,7 +1,7 @@
-import { writable } from "svelte/store";
+import { writable } from 'svelte/store';
 
-export const details = writable({
-  title: "",
-  gender: "",
-  nin: "",
+export const customer = writable({
+  title: '',
+  gender: '',
+  nin: ''
 });
