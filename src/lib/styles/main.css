@@ -1,0 +1,62 @@
+/* Ignor the @font-face for now: will need to get the proper typeface from Marketing */
+/* 
+@font-face {
+  font-family: "Haas Grot Text";
+  src: url("./fonts/HaasGrotTextR-55Roman.woff2") format("woff2"),
+    url("./fonts/HaasGrotTextR-55Roman.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Haas Grot Text";
+  src: url("./fonts/HaasGrotTextR-56Italic.woff2") format("woff2"),
+    url("./fonts/HaasGrotTextR-56Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Haas Grot Text";
+  src: url("./fonts/HaasGrotTextR-65Medium.woff2") format("woff2"),
+    url("./fonts/HaasGrotTextR-65Medium.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+ */
+
+body {
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-surface-70, #f3eeea);
+}
+
+main {
+  min-height: 100vh;
+  padding: 4rem 0.75rem 0.75rem 0.75rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+p,
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: 1rem;
+}
+
+h1 {
+  line-height: 1.2em;
+}
+
+cmc-button,
+cmc-select,
+cmc-textfield {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 1.5rem;
+}
