@@ -57,8 +57,7 @@
       </p>
     {/if}
     {#if !$customer.title || ($customer.title === 'other' && !$customer.other)}
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <cmc-button disabled on:click={goNext}>Continue</cmc-button>
+      <cmc-button disabled>Continue</cmc-button>
     {:else}
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <cmc-button role="button" on:click={goNext}>Continue</cmc-button>

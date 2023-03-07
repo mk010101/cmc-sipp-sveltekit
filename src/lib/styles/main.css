@@ -36,9 +36,6 @@ body {
 }
 
 body {
-  zdisplay: flex;
-  zflex-direction: column;
-  zalign-items: center;
   background-color: var(--color-surface-70, #f3eeea);
 }
 
@@ -63,6 +60,7 @@ h1 {
 }
 
 cmc-button,
+cmc-check,
 cmc-select,
 cmc-textfield,
 cmc-range-bar {
