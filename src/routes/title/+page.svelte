@@ -5,26 +5,38 @@
   import { CmcSelect, CmcButton, CmcTextfield, CmcRangeBar } from '$lib/cmc-wc';
   import { goto } from '$app/navigation';
   import { customer } from '$lib/stores/store';
-  import { prevent_default } from 'svelte/internal';
+  import { onMount, prevent_default } from 'svelte/internal';
+
   CmcSelect;
   CmcButton;
 
-  let selectedTitle = '';
+  let title = '';
+  let other = '';
 
   const options = ['Dr', 'Mr', 'Mrs', 'Miss', 'Ms', 'Other'];
 
-  function onSelect() {
-    const el: CmcSelect | null = <CmcSelect | null>document.querySelector('cmc-select');
-    const elTxt: CmcTextfield | null = <CmcTextfield | null>document.querySelector('cmc-textfield');
+  let el: CmcSelect | null;
+  let elTxt: CmcTextfield | null;
 
-    selectedTitle = el?.value;
+  onMount(() => {
+    el = <CmcSelect | null>document.querySelector('cmc-select');
+    elTxt = <CmcTextfield | null>document.querySelector('cmc-textfield');
+    el!.value = $customer.title;
+    if (elTxt) elTxt.value = $customer.other;
+    //formInputHandler();
+    console.log($customer);
+  });
 
-    const title = selectedTitle && selectedTitle !== 'other' ? selectedTitle : elTxt?.value;
+  function formInputHandler() {
+    title = el?.value;
+    other = elTxt?.value;
+
+    //const title = selectedTitle && selectedTitle !== 'other' ? selectedTitle : elTxt?.value;
 
     customer.update((old) => {
-      return { ...old, title };
+      return { ...old, title, other };
     });
-    console.log($customer);
+    //console.log($customer);
   }
   function goNext(e: Event) {
     goto('/gender');
@@ -36,7 +48,7 @@
   <cmc-range-bar hideValue hideLabels steps="4" value="1" min="0" max="4" />
   <h2>How should we address you?</h2>
   <p>Can you provide us with a title that can be used before your name?</p>
-  <form on:input={onSelect} on:submit={goNext}>
+  <form on:input={formInputHandler} on:submit={goNext}>
     <cmc-select placeholder="Select title" value={$customer.title} name="title">
       <option />
       {#each options as opt}
@@ -44,9 +56,9 @@
       {/each}
     </cmc-select>
 
-    {#if /other/i.test(selectedTitle)}
+    {#if /other/i.test($customer.title)}
       <p>
-        <cmc-textfield placeholder="Title" name="other" />
+        <cmc-textfield placeholder="Title" name="other" value={$customer.other || ''} />
       </p>
     {/if}
     {#if !$customer.title}

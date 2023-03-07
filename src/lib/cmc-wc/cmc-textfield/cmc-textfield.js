@@ -1,7 +1,7 @@
-import { CmcInputElement } from "../CmcInputElement.js";
-import { getMask } from "../util/inputMask.js";
+import { CmcInputElement } from '../CmcInputElement.js';
+import { getMask } from '../util/inputMask.js';
 export class CmcTextfield extends CmcInputElement {
-    static template = /*html*/ `
+  static template = /*html*/ `
     <style>      
       cmc-textfield {
         display: inline-block;
@@ -156,95 +156,91 @@ export class CmcTextfield extends CmcInputElement {
       </div>
     </label>  
   `;
-    #floater = null;
-    _template = "";
-    #inputMask = null;
-    #templ = "";
-    static get observedAttributes() {
-        return CmcTextfield.watchedAttributes.concat(["template"]);
+  #floater = null;
+  _template = '';
+  #inputMask = null;
+  #templ = '';
+  static get observedAttributes() {
+    return CmcTextfield.watchedAttributes.concat(['template']);
+  }
+  constructor() {
+    super();
+    this._template = CmcTextfield.template;
+  }
+  attributeChangedCallback(name, _, newValue) {
+    super.attributeChangedCallback(name, _, newValue);
+    if (!this._connected) return;
+    switch (name) {
+      case 'placeholder':
+        this.#floater.textContent = newValue;
+        this._inputElement.placeholder = newValue;
+        break;
+      case 'template':
+        this.template = newValue;
+        break;
     }
-    constructor() {
-        super();
-        this._template = CmcTextfield.template;
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    this._inputElement = this.querySelector('input');
+    this.#floater = this.querySelector('.floater');
+    this._registerListener(this, 'click', this.#iconClickHandler);
+    this._setConnected();
+  }
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.#inputMask) this.#inputMask.removeListeners();
+  }
+
+  set value(value) {
+    super.value = value;
+  }
+
+  get value() {
+    if (!this._inputElement) return '';
+    if (this.#inputMask) return this.#inputMask.getValue();
+    return this._inputElement.value;
+  }
+  get rawValue() {
+    if (!this._inputElement) return '';
+    return this._inputElement.value;
+  }
+  get template() {
+    return this.#templ;
+  }
+  set template(value) {
+    if (!this._inputElement) return;
+    if (!value) {
+      console.warn('<cmc-textfield>: no template value provided.');
+      return;
     }
-    attributeChangedCallback(name, _, newValue) {
-        super.attributeChangedCallback(name, _, newValue);
-        if (!this._connected)
-            return;
-        switch (name) {
-            case "placeholder":
-                this.#floater.textContent = newValue;
-                this._inputElement.placeholder = newValue;
-                break;
-            case "template":
-                this.template = newValue;
-                break;
+    // Cleanup if previous template was set
+    if (this.#templ && this.#inputMask) {
+      this.#inputMask.removeListeners();
+    }
+    this.#templ = value;
+    const mask = getMask(this._inputElement, this.#templ);
+    if (mask) this.#inputMask = mask;
+  }
+  get inputElement() {
+    return this._inputElement;
+  }
+  #iconClickHandler(e) {
+    const targ = e.target;
+    const id = targ.getAttribute('data-id');
+    if (!id) return;
+    switch (id) {
+      case 'password':
+        if (this._inputElement?.type === 'password') {
+          this._inputElement.type = 'text';
+        } else {
+          this._inputElement.type = 'password';
         }
+        break;
+      case 'search':
+        this._inputElement.value = '';
+        break;
     }
-    connectedCallback() {
-        super.connectedCallback();
-        this._inputElement = this.querySelector("input");
-        this.#floater = this.querySelector(".floater");
-        this._registerListener(this, "click", this.#iconClickHandler);
-        this._setConnected();
-    }
-    disconnectedCallback() {
-        super.disconnectedCallback();
-        if (this.#inputMask)
-            this.#inputMask.removeListeners();
-    }
-    get value() {
-        if (!this._inputElement)
-            return "";
-        if (this.#inputMask)
-            return this.#inputMask.getValue();
-        return this._inputElement.value;
-    }
-    get rawValue() {
-        if (!this._inputElement)
-            return "";
-        return this._inputElement.value;
-    }
-    get template() {
-        return this.#templ;
-    }
-    set template(value) {
-        if (!this._inputElement)
-            return;
-        if (!value) {
-            console.warn("<cmc-textfield>: no template value provided.");
-            return;
-        }
-        // Cleanup if previous template was set
-        if (this.#templ && this.#inputMask) {
-            this.#inputMask.removeListeners();
-        }
-        this.#templ = value;
-        const mask = getMask(this._inputElement, this.#templ);
-        if (mask)
-            this.#inputMask = mask;
-    }
-    get inputElement() {
-        return this._inputElement;
-    }
-    #iconClickHandler(e) {
-        const targ = e.target;
-        const id = targ.getAttribute("data-id");
-        if (!id)
-            return;
-        switch (id) {
-            case "password":
-                if (this._inputElement?.type === "password") {
-                    this._inputElement.type = "text";
-                }
-                else {
-                    this._inputElement.type = "password";
-                }
-                break;
-            case "search":
-                this._inputElement.value = "";
-                break;
-        }
-    }
+  }
 }
-customElements.define("cmc-textfield", CmcTextfield);
+customElements.define('cmc-textfield', CmcTextfield);

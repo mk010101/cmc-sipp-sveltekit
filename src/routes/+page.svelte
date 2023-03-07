@@ -18,6 +18,7 @@
     Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
     Lorem Ipsum.
   </p>
+
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <cmc-button variant="tertiary" on:click={goNext}>Continue</cmc-button>
 </main>
@@ -26,7 +27,8 @@
 
 <style>
   main {
-    zmin-height: 98vh;
+    min-height: 100%;
+    flex-grow: 100%;
     width: 100%;
     color: var(--color-light);
     display: flex;
