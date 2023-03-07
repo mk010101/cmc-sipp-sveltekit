@@ -6,7 +6,6 @@ export class CmcSelect extends CmcInputElement {
         display: inline-block;
         vertical-align: -.5em;
       }
-
       cmc-select label {
         display: inline-grid;
         grid-template-rows: 1fr;
@@ -16,7 +15,6 @@ export class CmcSelect extends CmcInputElement {
         cursor: text;
         min-width: 12rem;
       }
-
       cmc-select select {
         color: var(--color-neutral-base, #333333);
         background-color: var(--color-light, #ffffff);
@@ -33,17 +31,14 @@ export class CmcSelect extends CmcInputElement {
         outline: none;
         appearance: none;
       }
-
       cmc-select select:focus {
         border-color: var(--color-accent-base, #1b64f5);
       }
-
       cmc-select .floater,
       cmc-select select {
         transition: all 0.2s;
         touch-action: manipulation;
       }
-
       cmc-select .floater {
         font-weight: normal;
         color: var(--color-neutral-base, #333333);
@@ -54,7 +49,6 @@ export class CmcSelect extends CmcInputElement {
         pointer-events: none;
         font-size: .8rem;
       }
-
       cmc-select .arrow {
         font-weight: normal;
         color: var(--color-neutral-base, #333333);
@@ -67,30 +61,24 @@ export class CmcSelect extends CmcInputElement {
         font-size: 1.5rem;
         text-align: right;
       }
-
       cmc-select ::placeholder {
         opacity: 0;
         transition: inherit;
       }  
-
       cmc-select select:not(:placeholder-shown):focus ~ .floater {
         color: var(--color-accent-base, #287fe9);
       }
-
       cmc-select select:invalid {
         border-color: var(--color-negative, #ff0000);
       }
-
       cmc-select select:invalid ~ .floater {
         color: var(--color-negative, #ff0000) !important;
       } 
-
       cmc-select:has(option:checked[value=""]) .floater {
         padding-top: 1.1em;
         font-size: 1rem;
       }
     </style>
-
     <label>
     <select class="cmcwc-select cmc-slot"></select>
     <div class="floater">placeholder</div>
@@ -144,8 +132,8 @@ export class CmcSelect extends CmcInputElement {
           opt.textContent = newValue;
           this._inputElement.appendChild(opt);
           this._inputElement.selectedIndex = opts.length - 1;
-          console.log(opts.length, found);
         }
+
         break;
     }
   }

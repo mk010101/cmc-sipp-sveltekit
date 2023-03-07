@@ -1,28 +1,28 @@
-import { CmcElement } from "./CmcElement.js";
+import { CmcElement } from './CmcElement.js';
 export class CmcInputElement extends CmcElement {
   _inputElement;
   static watchedAttributes = [
-    "autofocus",
-    "autocomplete",
-    "name",
-    "disabled",
-    "checked",
-    "required",
-    "value",
-    "placeholder",
-    "form",
-    "min",
-    "max",
-    "maxlength",
-    "minlength",
-    "multiple",
-    "pattern",
-    "readonly",
-    "size",
-    "type",
-    "rows",
-    "cols",
-    "errormessage",
+    'autofocus',
+    'autocomplete',
+    'name',
+    'disabled',
+    'checked',
+    'required',
+    'value',
+    'placeholder',
+    'form',
+    'min',
+    'max',
+    'maxlength',
+    'minlength',
+    'multiple',
+    'pattern',
+    'readonly',
+    'size',
+    'type',
+    'rows',
+    'cols',
+    'errormessage'
   ];
   constructor() {
     super();
@@ -32,74 +32,74 @@ export class CmcInputElement extends CmcElement {
     super.attributeChangedCallback(name, _, newValue);
     if (!this._inputElement) return;
     switch (name) {
-      case "accept":
-        this._inputElement.setAttribute("accept", newValue);
+      case 'accept':
+        this._inputElement.setAttribute('accept', newValue);
         break;
-      case "autofocus":
-        this._inputElement.setAttribute("autofocus", "");
+      case 'autofocus':
+        this._inputElement.setAttribute('autofocus', '');
         this.focus();
         break;
-      case "autocomplete":
-        this._inputElement.setAttribute("autocomplete", newValue);
+      case 'autocomplete':
+        this._inputElement.setAttribute('autocomplete', newValue);
         break;
-      case "placeholder":
-        this._inputElement.setAttribute("placeholder", newValue);
+      case 'placeholder':
+        this._inputElement.setAttribute('placeholder', newValue);
         break;
-      case "name":
+      case 'name':
         this._inputElement.name = newValue;
         break;
-      case "value":
+      case 'value':
         this._inputElement.value = newValue;
         break;
-      case "disabled":
+      case 'disabled':
         this._inputElement.disabled = true;
         break;
-      case "checked":
+      case 'checked':
         this._inputElement.checked = true;
         break;
-      case "required":
+      case 'required':
         this._inputElement.required = true;
         break;
-      case "form":
-        this._inputElement.setAttribute("form", newValue);
+      case 'form':
+        this._inputElement.setAttribute('form', newValue);
         break;
-      case "max":
+      case 'max':
         this._inputElement.max = newValue;
         break;
-      case "min":
+      case 'min':
         this._inputElement.min = newValue;
         break;
-      case "maxlength":
-        this._inputElement.setAttribute("maxlength", newValue);
+      case 'maxlength':
+        this._inputElement.setAttribute('maxlength', newValue);
         break;
-      case "minlength":
-        this._inputElement.setAttribute("minlength", newValue);
+      case 'minlength':
+        this._inputElement.setAttribute('minlength', newValue);
         break;
-      case "multiple":
-        this._inputElement.setAttribute("multiple", "");
+      case 'multiple':
+        this._inputElement.setAttribute('multiple', '');
         break;
-      case "pattern":
-        this._inputElement.setAttribute("pattern", newValue);
+      case 'pattern':
+        this._inputElement.setAttribute('pattern', newValue);
         break;
-      case "readonly":
-        this._inputElement.setAttribute("readonly", "");
+      case 'readonly':
+        this._inputElement.setAttribute('readonly', '');
         break;
-      case "size":
-        this._inputElement.setAttribute("size", newValue);
+      case 'size':
+        this._inputElement.setAttribute('size', newValue);
         break;
-      case "step":
-        this._inputElement.setAttribute("step", newValue);
+      case 'step':
+        this._inputElement.setAttribute('step', newValue);
         break;
-      case "type":
-        this._inputElement.setAttribute("type", newValue);
+      case 'type':
+        this._inputElement.setAttribute('type', newValue);
         break;
-      case "rows":
-        this._inputElement.setAttribute("rows", newValue);
+      case 'rows':
+        this._inputElement.setAttribute('rows', newValue);
         break;
-      case "cols":
-        this._inputElement.setAttribute("cols", newValue);
+      case 'cols':
+        this._inputElement.setAttribute('cols', newValue);
         break;
-      case "errormessage":
+      case 'errormessage':
         this.setCustomValidity(newValue);
         break;
     }
@@ -111,57 +111,57 @@ export class CmcInputElement extends CmcElement {
     this._inputElement?.blur();
   }
   get name() {
-    if (!this._inputElement) return "";
+    if (!this._inputElement) return '';
     return this._inputElement.name;
   }
   set name(value) {
-    this._setAttr("name", value);
+    this._setAttr('name', value);
   }
   get type() {
-    if (!this._inputElement) return "";
+    if (!this._inputElement) return '';
     return this._inputElement.type;
   }
   set type(value) {
-    this._setAttr("type", value);
+    this._setAttr('type', value);
   }
   get value() {
-    if (!this._inputElement) return "";
+    if (!this._inputElement) return '';
     return this._inputElement?.value;
   }
   set value(value) {
-    this._setAttr("value", value);
+    this._setAttr('value', value);
   }
   get disabled() {
-    return this._inputElement?.hasAttribute("disabled");
+    return this._inputElement?.hasAttribute('disabled');
   }
   set disabled(value) {
-    this._setAttr("disabled", value);
+    this._setAttr('disabled', value);
   }
   get checked() {
     if (!this._inputElement) return false;
-    return this._inputElement?.hasAttribute("checked");
+    return this._inputElement?.hasAttribute('checked');
   }
   set checked(value) {
-    this._setAttr("checked", value);
+    this._setAttr('checked', value);
   }
   get required() {
     if (!this._inputElement) return false;
-    return this._inputElement?.hasAttribute("required");
+    return this._inputElement?.hasAttribute('required');
   }
   set required(value) {
-    this._setAttr("required", value);
+    this._setAttr('required', value);
   }
   get cols() {
-    return this._inputElement?.getAttribute("cols") || "";
+    return this._inputElement?.getAttribute('cols') || '';
   }
   set cols(value) {
-    this._setAttr("cols", value);
+    this._setAttr('cols', value);
   }
   get rows() {
-    return this._inputElement?.getAttribute("rows") || "";
+    return this._inputElement?.getAttribute('rows') || '';
   }
   set rows(value) {
-    this._setAttr("rows", value);
+    this._setAttr('rows', value);
   }
   get validity() {
     return this._inputElement?.validity;
@@ -174,7 +174,7 @@ export class CmcInputElement extends CmcElement {
   }
   connectedCallback() {
     super.connectedCallback();
-    if (this.hasAttribute("autofocus")) {
+    if (this.hasAttribute('autofocus')) {
       this._inputElement?.focus();
     }
   }
@@ -185,12 +185,11 @@ export class CmcInputElement extends CmcElement {
    */
   _setAttr(attr, val) {
     if (!this._initialised) {
-      this.attributeChangedCallback(attr, "", val);
+      this.attributeChangedCallback(attr, '', val);
       if (!this.hasAttribute(attr)) this.setAttribute(attr, val);
     } else {
       if (!this.hasAttribute(attr)) this.setAttribute(attr, val);
-      if (!this._inputElement?.hasAttribute(attr))
-        this._inputElement?.setAttribute("type", val);
+      if (!this._inputElement?.hasAttribute(attr)) this._inputElement?.setAttribute('type', val);
     }
   }
 }

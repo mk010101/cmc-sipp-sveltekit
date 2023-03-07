@@ -1,6 +1,6 @@
 import { CmcElement } from "./CmcElement.js";
 export declare class CmcInputElement extends CmcElement {
-    protected _inputElement: HTMLInputElement | null;
+    protected _inputElement: any;
     static watchedAttributes: string[];
     constructor();
     attributeChangedCallback(name: string, _: string, newValue: string): void;
@@ -22,8 +22,8 @@ export declare class CmcInputElement extends CmcElement {
     set cols(value: string);
     get rows(): string;
     set rows(value: string);
-    get validity(): ValidityState | undefined;
-    checkValidity(): boolean | undefined;
+    get validity(): any;
+    checkValidity(): any;
     setCustomValidity(message: string): void;
     connectedCallback(): void;
     /**

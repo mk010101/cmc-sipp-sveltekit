@@ -8,8 +8,8 @@ export declare class CmcTextfield extends CmcInputElement {
     attributeChangedCallback(name: string, _: string, newValue: string): void;
     connectedCallback(): void;
     disconnectedCallback(): void;
-    get value(): string;
-    get rawValue(): string;
+    get value(): any;
+    get rawValue(): any;
     get template(): string;
     set template(value: string);
     get inputElement(): HTMLInputElement | null;

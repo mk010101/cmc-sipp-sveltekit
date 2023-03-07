@@ -4,7 +4,7 @@
   import { CmcButton } from '$lib/cmc-wc';
 
   function goNext() {
-    goto('/step1');
+    goto('/title');
   }
 </script>
 
@@ -26,6 +26,8 @@
 
 <style>
   main {
+    zmin-height: 98vh;
+    width: 100%;
     color: var(--color-light);
     display: flex;
     align-items: center;
