@@ -18,18 +18,13 @@
   let el: CmcSelect | null;
   let elTxt: CmcTextfield | null;
 
-  onMount(() => {
+  function formInputHandler() {
     el = <CmcSelect | null>document.querySelector('cmc-select');
     elTxt = <CmcTextfield | null>document.querySelector('cmc-textfield');
-    el!.value = $customer.title;
-    if (elTxt) elTxt.value = $customer.other;
-    //formInputHandler();
-    console.log($customer);
-  });
-
-  function formInputHandler() {
     title = el?.value;
     other = elTxt?.value;
+    if (title && title !== 'other') other = '';
+    //console.log(title, other);
 
     //const title = selectedTitle && selectedTitle !== 'other' ? selectedTitle : elTxt?.value;
 
@@ -61,8 +56,9 @@
         <cmc-textfield placeholder="Title" name="other" value={$customer.other || ''} />
       </p>
     {/if}
-    {#if !$customer.title}
-      <cmc-button disabled>Continue</cmc-button>
+    {#if !$customer.title || ($customer.title === 'other' && !$customer.other)}
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <cmc-button disabled on:click={goNext}>Continue</cmc-button>
     {:else}
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <cmc-button role="button" on:click={goNext}>Continue</cmc-button>
